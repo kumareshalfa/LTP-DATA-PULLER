@@ -1,10 +1,11 @@
 <?php
 	DEFINE('DS', DIRECTORY_SEPARATOR); 
 	class dbConfig {
+		
 		public $hostname = 'localhost';
 		public $username = 'root';
 		public $dbName = 'epush';
-		public $password = 'root@123';
+		public $password = 'admin';
 	}
 	$dbConfig=new dbConfig();
 	$mysqli  = new mysqli($dbConfig->hostname, $dbConfig->username, $dbConfig->password, $dbConfig->dbName);
