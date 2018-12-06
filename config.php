@@ -13,7 +13,8 @@
 		printf("Connect failed: %s\n", mysqli_connect_error());
 		exit();
 	}
-	$logFilesFolder="/Users/kumaresan.m/Sites/LTP/allnew";
+	// $logFilesFolder="/Users/kumaresan.m/Sites/LTP/allnew";
+	$logFilesFolder="D:".DS."CIP1contract".DS."backup";
 	$fileNamePrefix="cdl";
     date_default_timezone_set('Asia/Kolkata');
 	$mysqli->query("SET SESSION SQL_BIG_SELECTS=1");

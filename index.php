@@ -1,82 +1,63 @@
-<?php
-error_reporting(E_ERROR | E_PARSE);
+<?php error_reporting(E_ERROR | E_PARSE);
 require_once 'config.php';
 try {
     if (!file_exists($logFilesFolder))
     mkdir($logFilesFolder, 0777, true);
-} catch(Exception $e){print_r($e);}
-// print_r($argv);
-//checking from and to values from shell
-if (count($argv) >= 2) {
-    $startDateIndex =1;
-    $endDateIndex=2;
-    if(strtotime($argv[$startDateIndex])) {
-        $startAt = strtotime($argv[$startDateIndex]);
-        if(strtotime($argv[$endDateIndex]) && strtotime($argv[$endDateIndex])>$startAt) {
-            $endAt = strtotime($argv[$endDateIndex]);
-            // print_r(date("YmdHis",$endAt));
-            // echo "<br>";
-        } else {
-            //consider from date is the end date
-            $endAt = $startAt;
+} catch(Exception $c1){print_r($c1);}
+if (count($d2) >= 2) {
+    $j3 =1;
+    $n4=2;
+    if(strtotime($d2[$j3])) {
+        $c5 = strtotime($d2[$j3]);
+        if(strtotime($d2[$n4]) && strtotime($d2[$n4])>$c5) {
+            $q6 = strtotime($d2[$n4]);
+                                } else {
+                        $q6 = $c5;
         }
     }    
 }   
+if(empty($q6))
+$q6 = strtotime(base64_decode('bm93'));
+if(empty($c5))
+$c5 = strtotime(base64_decode('bm93'));
 
-if(empty($endAt))
-$endAt = strtotime('now');
-if(empty($startAt))
-$startAt = strtotime('now');
-
-$startAt = strtotime(date("Y-m-d 00:00:00",$startAt))-(24*60*60); // start of the day and then one day previous
-
-echo ($logFilesFolder);
-
-echo "\nstart:".date("YmdHis",$startAt)." end:".date("YmdHis",$endAt);
-
-$tableNames =array();
-//loop thro month range and collect table names
-$tmpDate = strtotime(date("Y-m-01 00:00:00",$startAt));
-while ($tmpDate <= $endAt) {
-   $tableNames[]="devicelogs_".date("n_Y",$tmpDate);
-   $tmpDate = strtotime("+1 month",  $tmpDate);
+$c5 = strtotime(date(base64_decode('WS1tLWQgMDA6MDA6MDA='),$c5))-(24*60*60); 
+echo base64_decode('CnN0YXJ0Og==').date(base64_decode('WW1kSGlz'),$c5).base64_decode('IGVuZDo=').date(base64_decode('WW1kSGlz'),$q6);
+$x7 =array();
+$z8 = strtotime(date(base64_decode('WS1tLTAxIDAwOjAwOjAw'),$c5));
+while ($z8 <= $q6) {
+   $x7[]=base64_decode('ZGV2aWNlbG9nc18=').date(base64_decode('bl9Z'),$z8);
+   $z8 = strtotime(base64_decode('KzEgbW9udGg='),  $z8);
 }
-$tableNames = array_unique($tableNames);
-$content = array();
-foreach($tableNames as $table) {
-    $query = " SELECT DATE_FORMAT(LogDate,'%Y%m%d') as punchdate,DATE_FORMAT(LogDate,'%H%i%s') as punchtime,
-    log.Direction,de.DevicesName,log.DeviceId,log.UserId as cardNumber
-    FROM ".$table." log
-    left join devices de on log.DeviceId=de.DeviceId
-    WHERE (log.LogDate >= '".date("Y-m-d H:i:s",$startAt)."' AND log.LogDate <'".date("Y-m-d H:i:s",$endAt)."')
-    ";
-    //    echo $query."<br>";
-    $result = $mysqli->query($query);
-    if(mysqli_num_rows($result)>0) {
-        foreach($result as $row) {
-            $str="";
-            $cardNumber="";
-            $machineId="";
-            $inOutStatus="0";
-            if(!empty($row['cardNumber'])) {
-                $cardNumber = substr($row['cardNumber'],0,20);
+$x7 = array_unique($x7);
+$y9 = array();
+foreach($x7 as $t10) {
+    $d11 = base64_decode('IFNFTEVDVCBEQVRFX0ZPUk1BVChMb2dEYXRlLCclWSVtJWQnKSBhcyBwdW5jaGRhdGUsREFURV9GT1JNQVQoTG9nRGF0ZSwnJUglaSVzJykgYXMgcHVuY2h0aW1lLA0KICAgIGxvZy5EaXJlY3Rpb24sZGUuRGV2aWNlc05hbWUsbG9nLkRldmljZUlkLGxvZy5Vc2VySWQgYXMgY2FyZE51bWJlcg0KICAgIEZST00g').$t10.base64_decode('IGxvZw0KICAgIGxlZnQgam9pbiBkZXZpY2VzIGRlIG9uIGxvZy5EZXZpY2VJZD1kZS5EZXZpY2VJZA0KICAgIFdIRVJFIChsb2cuTG9nRGF0ZSA+PSAn').date(base64_decode('WS1tLWQgSDppOnM='),$c5).base64_decode('JyBBTkQgbG9nLkxvZ0RhdGUgPCc=').date(base64_decode('WS1tLWQgSDppOnM='),$q6).base64_decode('JykNCiAgICA=');
+        $g12 = $mysqli->query($d11);
+    if(mysqli_num_rows($g12)>0) {
+        foreach($g12 as $u14) {
+            $j15='';
+            $i16='';
+            $y17='';
+            $k18=base64_decode('MA==');
+            if(!empty($u14[base64_decode('Y2FyZE51bWJlcg==')])) {
+                $i16 = substr($u14[base64_decode('Y2FyZE51bWJlcg==')],0,20);
             }
-            if(!empty($row['DevicesName'])) {
-                $machineId  = substr($row['DevicesName'],0,20);
+            if(!empty($u14[base64_decode('RGV2aWNlc05hbWU=')])) {
+                $y17  = substr($u14[base64_decode('RGV2aWNlc05hbWU=')],0,20);
             }
-            $str=str_pad($cardNumber,20,"-",STR_PAD_LEFT).$row['punchdate'].$row['punchtime'].$inOutStatus.str_pad($machineId,20,"-",STR_PAD_LEFT);
-            $content[]=$str;
+            $j15=str_pad($i16,20,base64_decode('LQ=='),STR_PAD_LEFT).$u14[base64_decode('cHVuY2hkYXRl')].$u14[base64_decode('cHVuY2h0aW1l')].$k18.str_pad($y17,20,base64_decode('LQ=='),STR_PAD_LEFT);
+            $y9[]=$j15;
         }
     }
 }
-
- //writting content into file
- if(!empty($content)) {
+mysqli_close($mysqli);
+  if(!empty($y9)) {
     
-    $fileName = $logFilesFolder.DS.$fileNamePrefix.date("YmdHi",$endAt).".txt";
-    if(!file_exists($fileName)) {
-        $fh = fopen($fileName, 'w+');
+    $v19 = $logFilesFolder.DS.$fileNamePrefix.date(base64_decode('WW1kSGk='),$q6).base64_decode('LnR4dA==');
+    if(!file_exists($v19)) {
+        $k21 = fopen($v19, base64_decode('dys='));
     }
-    file_put_contents($fileName,implode($content,PHP_EOL));
+    file_put_contents($v19,implode($y9,PHP_EOL));
 }
 ?>
