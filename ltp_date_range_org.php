@@ -22,11 +22,14 @@ $tableNames = array_unique($tableNames);
 $content = array();
 foreach($tableNames as $table) {
     $query = " SELECT DATE_FORMAT(LogDate,'%Y%m%d') as punchdate,DATE_FORMAT(LogDate,'%H%i%s') as punchtime,
-    log.Direction,log.DeviceId,log.UserId as cardNumber
+    log.Direction,de.DevicesName,log.DeviceId,log.UserId as cardNumber
     FROM ".$table." log
+    left join devices de on log.DeviceId=de.DeviceId
     WHERE (log.LogDate >= '".date("Y-m-d H:i:s",$startAt)."' AND log.LogDate <'".date("Y-m-d H:i:s",$endAt)."')
     ";
+    // echo ($query);
     $result = $mysqli->query($query);
+    // echo ($result);
     if(mysqli_num_rows($result)>0) {
         foreach($result as $row) {
             $str="";
@@ -36,8 +39,8 @@ foreach($tableNames as $table) {
             if(!empty($row['cardNumber'])) {
                 $cardNumber = substr($row['cardNumber'],0,20);
             }
-            if(!empty($row['DeviceId'])) {
-                $machineId  = substr($row['DeviceId'],0,20);
+            if(!empty($row['DevicesName'])) {
+                $machineId  = substr($row['DevicesName'],0,20);
             }
             $str=str_pad($cardNumber,20,"-",STR_PAD_LEFT).$row['punchdate'].$row['punchtime'].$inOutStatus.str_pad($machineId,20,"-",STR_PAD_LEFT);
             $content[]=$str;
