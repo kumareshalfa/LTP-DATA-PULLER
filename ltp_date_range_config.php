@@ -1,7 +1,6 @@
 <?php
 	DEFINE('DS', DIRECTORY_SEPARATOR); 
-	class dbConfig {
-		
+	class dbConfig {	
 		public $hostname = 'localhost';
 		public $username = 'root';
 		public $dbName = 'epush';
