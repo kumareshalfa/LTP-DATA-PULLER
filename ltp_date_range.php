@@ -1,57 +1,6 @@
-<?php 
-ini_set(base64_decode('ZGlzcGxheV9lcnJvcnM='), 1);
-ini_set(base64_decode('ZGlzcGxheV9zdGFydHVwX2Vycm9ycw=='), 1);
-error_reporting(E_ALL);
-require_once base64_decode('bHRwX2RhdGVfcmFuZ2VfY29uZmlnLnBocA==');
-try {
-    if (!file_exists($logFilesFolder))
-    mkdir($logFilesFolder, 0777, true);
-} catch(Exception $a1){print_r($a1);}
-
-$o2 = strtotime($startDt); $t4 = strtotime($endtDt);
-
-echo base64_decode('c3RhcnQ6').$o2.base64_decode('IGVuZDo=').$t4;
-
-$t6 =array();
-$a7 = strtotime(date(base64_decode('WS1tLTAxIDAwOjAwOjAw'),$o2));
-while ($a7 <= $t4) {
-   $t6[]=base64_decode('ZGV2aWNlbG9nc18=').date(base64_decode('bl9Z'),$a7);
-   $a7 = strtotime(base64_decode('KzEgbW9udGg='),  $a7);
-}
-$t6 = array_unique($t6);
-$m8 = array();
-
-foreach($t6 as $z9) {
-    $w10 = base64_decode('IFNFTEVDVCBEQVRFX0ZPUk1BVChMb2dEYXRlLCclWSVtJWQnKSBhcyBwdW5jaGRhdGUsREFURV9GT1JNQVQoTG9nRGF0ZSwnJUglaSVzJykgYXMgcHVuY2h0aW1lLA0KICAgIGxvZy5EaXJlY3Rpb24sbG9nLkRldmljZUlkLGxvZy5Vc2VySWQgYXMgY2FyZE51bWJlcg0KICAgIEZST00g').$z9.base64_decode('IGxvZw0KICAgIFdIRVJFIChsb2cuTG9nRGF0ZSA+PSAn').date(base64_decode('WS1tLWQgSDppOnM='),$o2).base64_decode('JyBBTkQgbG9nLkxvZ0RhdGUgPCc=').date(base64_decode('WS1tLWQgSDppOnM='),$t4).base64_decode('JykNCiAgICA=');
-    $g11 = $mysqli->query($w10);
-    if(mysqli_num_rows($g11)>0) {
-        foreach($g11 as $p14) {
-            $x15='';
-            $e16='';
-            $v17='';
-            $j18=base64_decode('MA==');
-            if(!empty($p14[base64_decode('Y2FyZE51bWJlcg==')])) {
-                $e16 = substr($p14[base64_decode('Y2FyZE51bWJlcg==')],0,20);
-            }
-            if(!empty($p14[base64_decode('RGV2aWNlSWQ=')])) {
-                $v17  = substr($p14[base64_decode('RGV2aWNlSWQ=')],0,20);
-            }
-            $x15=str_pad($e16,20,base64_decode('LQ=='),STR_PAD_LEFT).$p14[base64_decode('cHVuY2hkYXRl')].$p14[base64_decode('cHVuY2h0aW1l')].$j18.str_pad($v17,20,base64_decode('LQ=='),STR_PAD_LEFT);
-            $m8[]=$x15;
-        }
-    }
-}
-  if(!empty($m8)) {
-    
-    $c19 = $logFilesFolder.DS.$fileNamePrefix.date(base64_decode('WW1kSGk='),$t4).base64_decode('LnR4dA==');
-    if(!file_exists($c19)) {
-        $u21 = fopen($c19, base64_decode('dys='));
-    }
-    file_put_contents($c19,implode($m8,PHP_EOL));
-}
-
-
-
-
-
-?>
+<?php error_reporting(E_ERROR|E_PARSE);require_once'ltp_date_range_config.php';try{if(!file_exists($logFilesFolder))mkdir($logFilesFolder,0777,true);}catch(Exception $z1){print_r($z1);}$d2=strtotime($startDt);$s4=strtotime($endtDt);echo "start:".$d2." end:".$s4;$i6=array();$h7=strtotime(date("Y-m-01 00:00:00",$d2));while($h7<=$s4){$i6[]="devicelogs_".date("n_Y",$h7);$h7=strtotime("+1 month",$h7);}$i6=array_unique($i6);$d8=array();foreach($i6 as $q9){$c10=" SELECT DATE_FORMAT(LogDate,'%Y%m%d') as punchdate,DATE_FORMAT(LogDate,'%H%i%s') as punchtime,
+    log.Direction,de.DevicesName,log.DeviceId,log.UserId as cardNumber
+    FROM ".$q9." log
+    left join devices de on log.DeviceId=de.DeviceId
+    WHERE (log.LogDate >= '".date("Y-m-d H:i:s",$d2)."' AND log.LogDate <'".date("Y-m-d H:i:s",$s4)."')
+    ";$c11=$mysqli->query($c10);if(mysqli_num_rows($c11)>0){foreach($c11 as $j13){$j14="";$l15="";$l16="";$b17="0";if(!empty($j13['cardNumber'])){$l15=substr($j13['cardNumber'],0,20);}if(!empty($j13['DevicesName'])){$l16=substr($j13['DevicesName'],0,20);}$j14=str_pad($l15,20,"-",STR_PAD_LEFT).$j13['punchdate'].$j13['punchtime'].$b17.str_pad($l16,20,"-",STR_PAD_LEFT);$d8[]=$j14;}}}if(!empty($d8)){$j18=$logFilesFolder.DS.$fileNamePrefix.date("YmdHi",$s4).".txt";if(!file_exists($j18)){$y20=fopen($j18,'w+');}file_put_contents($j18,implode($d8,PHP_EOL));}?>

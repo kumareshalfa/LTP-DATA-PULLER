@@ -6,8 +6,8 @@ try {
     mkdir($logFilesFolder, 0777, true);
 } catch(Exception $e){print_r($e);}
 
-$startAt = $startDt; // start of the day and then one day previous
-$endAt = $endtDt;
+$startAt = strtotime($startDt); // start of the day and then one day previous
+$endAt = strtotime($endtDt);
 
 echo "start:".$startAt." end:".$endAt;
 
