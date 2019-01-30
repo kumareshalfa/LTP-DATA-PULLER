@@ -21,7 +21,7 @@ $q6 = strtotime(base64_decode('bm93'));
 if(empty($c5))
 $c5 = strtotime(base64_decode('bm93'));
 
-$c5 = strtotime(date(base64_decode('WS1tLWQgMDA6MDA6MDA='),$c5))-(24*60*60); 
+$c5 = strtotime(date(base64_decode('WS1tLWQgMDA6MDA6MDA='),$c5))-(48*60*60); 
 echo base64_decode('CnN0YXJ0Og==').date(base64_decode('WW1kSGlz'),$c5).base64_decode('IGVuZDo=').date(base64_decode('WW1kSGlz'),$q6);
 $x7 =array();
 $z8 = strtotime(date(base64_decode('WS1tLTAxIDAwOjAwOjAw'),$c5));
